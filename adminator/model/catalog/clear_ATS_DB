@@ -1,0 +1,21 @@
+truncate table oc_product;
+truncate table oc_product_attribute; 
+truncate table oc_product_description; 
+truncate table oc_product_discount; 
+truncate table oc_product_filter ;
+truncate table oc_product_image ;
+truncate table oc_product_option ;
+truncate table oc_product_option_value ;
+truncate table oc_product_related ;
+truncate table oc_product_related;
+truncate table oc_product_reward ;
+truncate table oc_product_special ;
+truncate table oc_product_to_category ;
+truncate table oc_product_to_download ;
+truncate table oc_product_to_layout ;
+truncate table oc_product_to_store ;
+truncate table oc_product_recurring;
+truncate table oc_review ;
+truncate table oc_seo_url;
+truncate table oc_coupon_product ;
+
