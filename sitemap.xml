@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
+<url>
+  <loc>https://littlethingsme.com/</loc>
+  <lastmod>2019-07-16T03:56:51+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://littlethingsme.com/login</loc>
+  <lastmod>2019-07-16T03:56:51+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://littlethingsme.com/register</loc>
+  <lastmod>2019-07-16T03:56:51+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://littlethingsme.com/tsume</loc>
+  <lastmod>2019-07-16T03:56:51+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://littlethingsme.com/index.php?route=product/search&amp;search=Kikkerland</loc>
+  <lastmod>2019-07-16T03:56:51+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://littlethingsme.com/index.php?route=product/search&amp;search=Funko%20Pop</loc>
+  <lastmod>2019-07-16T03:56:51+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://littlethingsme.com/index.php?route=product/search&amp;search=Exclusives</loc>
+  <lastmod>2019-07-16T03:56:51+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://littlethingsme.com/exclusives</loc>
+  <lastmod>2019-07-16T03:56:51+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://littlethingsme.com/contact-us</loc>
+  <lastmod>2019-07-16T03:56:51+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://littlethingsme.com/index.php?route=product/product&amp;product_id=5&amp;search=protector</loc>
+  <lastmod>2019-07-16T03:56:51+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://littlethingsme.com/index.php?route=product/search&amp;search=Fortnite</loc>
+  <lastmod>2019-07-16T03:56:51+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://littlethingsme.com/index.php?route=account/return/add</loc>
+  <lastmod>2019-07-16T03:56:51+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://littlethingsme.com/index.php?route=account/voucher</loc>
+  <lastmod>2019-07-16T03:56:51+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://littlethingsme.com/index.php?route=affiliate/login</loc>
+  <lastmod>2019-07-16T03:56:51+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://littlethingsme.com/index.php?route=account/forgotten</loc>
+  <lastmod>2019-07-16T03:56:51+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://littlethingsme.com/index.php?route=information/information/agree&amp;information_id=3</loc>
+  <lastmod>2019-07-16T03:56:51+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://littlethingsme.com/index.php?route=information/information/agree&amp;information_id=5</loc>
+  <lastmod>2019-07-16T03:56:51+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://littlethingsme.com/index.php?route=affiliate/register</loc>
+  <lastmod>2019-07-16T03:56:51+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+
+
+</urlset>

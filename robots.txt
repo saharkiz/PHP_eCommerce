@@ -1,0 +1,6 @@
+Sitemap: https://littlethingsme.com/sitemap.xml
+User-agent: *
+Disallow: /adminator/
+Disallow: /API/
+Disallow: /storage/
+Disallow: /system/
