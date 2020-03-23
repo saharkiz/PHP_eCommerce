@@ -1,0 +1,202 @@
+{{ header }}{{ column_left }}
+
+<div id="content">
+
+  <div class="page-header">
+
+    <div class="container-fluid">
+
+      <div class="pull-right">
+
+        <button type="submit" form="form-attribute" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
+
+        <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a></div>
+
+      <h1>{{ "Forum Reply" }}</h1>
+
+      <ul class="breadcrumb">
+
+        
+        {% for breadcrumb in breadcrumbs %}
+        <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+        {% endfor %}
+
+      </ul>
+
+    </div>
+
+  </div>
+
+  <div class="container-fluid">
+
+    {% if error_warning %}
+    <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    {% endif %}
+
+    <div class="panel panel-default">
+
+      <div class="panel-heading">
+
+        <h3 class="panel-title"><i class="fa fa-pencil"></i> {{ "Edit Forum Reply" }}</h3>
+
+      </div>
+
+      <div class="panel-body">
+
+        <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-attribute" class="form-horizontal">
+
+          <div class="form-group required">
+
+            <label class="col-sm-2 control-label">{{ entry_name }}</label>
+
+            <div class="col-sm-10">
+
+            
+
+              <div class="form-group">
+
+                <input type="text" name="name" value="{{ name }}" placeholder="{{ entry_name }}" class="form-control" />
+
+              </div>
+
+               {% if error_name %}
+
+              <div class="text-danger">{{ error_name }}</div>
+
+              {% endif %}
+
+
+            </div>
+
+          </div>
+          <div class="form-group required">
+
+            <label class="col-sm-2 control-label">{{ entry_reply }}</label>
+
+            <div class="col-sm-10">
+
+            
+
+              <div class="form-group">
+				<textarea name="reply" id="reply" class="form-control">{{ reply }}</textarea>
+              
+
+              </div>
+			  
+			  {% if error_reply %}            
+
+              <div class="text-danger">{{ error_reply }}</div>
+
+              {% endif %}
+
+
+            </div>
+
+          </div>
+          <div class="form-group required">
+
+            <label class="col-sm-2 control-label">{{ entry_status }}</label>
+
+            <div class="col-sm-10">
+
+            
+
+              <div class="form-group">
+				<select name="status" class="form-control">
+				 {% if status  ==  0 %}
+                <option value="1">{{ text_enabled }}</option>
+                <option value="0" selected="selected">{{ text_disabled }}</option>				
+				{% elseif status  ==  1 %}				
+				<option value="1" selected="selected">{{ text_enabled }}</option>
+                <option value="0">{{ text_disabled }}</option>
+                   
+                {% endif %}
+               
+              </select>
+              
+
+              </div>
+
+               {% if error_name %}
+
+              <div class="text-danger">{{ error_name }}</div>
+
+              {% endif %}
+
+
+            </div>
+
+          </div>
+
+        
+        </form>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+<script type="text/javascript"><!--
+var image_row = {{ image_row }};
+
+function addImage() {
+    html  = '<tbody id="image-row' + image_row + '">';
+	html += '<tr>';
+    html += '<td class="left">';
+	{% for language in languages %}
+	html += '<input type="text" name="forum_image[' + image_row + '][forum_image_description][{{ language.language_id }}][title]" value="" /> <img src="view/image/flags/{{ language.image }}" title="{{ language.name }}" /><br />';
+   {% endfor %}
+	html += '</td>';	
+	html += '<td class="left"><div class="image"><img src="{{ no_image }}" alt="" id="thumb' + image_row + '" /><input type="hidden" name="forum_image[' + image_row + '][image]" value="" id="image' + image_row + '" /><br /><a onclick="image_upload(\'image' + image_row + '\', \'thumb' + image_row + '\');">{{ text_browse }}</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a onclick="$(\'#thumb' + image_row + '\').attr(\'src\', \'{{ no_image }}\'); $(\'#image' + image_row + '\').attr(\'value\', \'\');">{{ text_clear }}</a></div></td>';
+	html += '<td class="left"><a onclick="$(\'#image-row' + image_row  + '\').remove();" class="button">{{ button_remove }}</a></td>';
+	html += '</tr>';
+	html += '</tbody>'; 
+	
+	$('#images tfoot').before(html);
+	
+	image_row++;
+}
+//--></script>
+<script type="text/javascript"><!--
+function image_upload(field, thumb) {
+	$('#dialog').remove();
+	
+	$('#content').prepend('<div id="dialog" style="padding: 3px 0px 0px 0px;"><iframe src="index.php?route=common/filemanager&user_token={{ user_token }}&field=' + encodeURIComponent(field) + '" style="padding:0; margin: 0; display: block; width: 100%; height: 100%;" frameborder="no" scrolling="auto"></iframe></div>');
+	
+	$('#dialog').dialog({
+		title: '{{ text_image_manager }}',
+		close: function (event, ui) {
+			if ($('#' + field).attr('value')) {
+				$.ajax({
+					url: 'index.php?route=common/filemanager/image&user_token={{ user_token }}&image=' + encodeURIComponent($('#' + field).attr('value')),
+					dataType: 'text',
+					success: function(data) {
+						$('#' + thumb).replaceWith('<img src="' + data + '" alt="" id="' + thumb + '" />');
+					}
+				});
+			}
+		},	
+		bgiframe: false,
+		width: 700,
+		height: 400,
+		resizable: false,
+		modal: false
+	});
+};
+//--></script> 
+<script type="text/javascript" src="view/javascript/ckeditor/ckeditor.js"></script>
+<script type="text/javascript"><!--
+CKEDITOR.replace('replyg', {
+ filebrowserBrowseUrl: 'index.php?route=common/filemanager&user_token={{ user_token }}',
+ filebrowserImageBrowseUrl: 'index.php?route=common/filemanager&user_token={{ user_token }}',
+ filebrowserFlashBrowseUrl: 'index.php?route=common/filemanager&user_token={{ user_token }}',
+ filebrowserUploadUrl: 'index.php?route=common/filemanager&user_token={{ user_token }}',
+ filebrowserImageUploadUrl: 'index.php?route=common/filemanager&user_token={{ user_token }}',
+ filebrowserFlashUploadUrl: 'index.php?route=common/filemanager&user_token={{ user_token }}'
+});
+//--></script>
+{{  footer }}
