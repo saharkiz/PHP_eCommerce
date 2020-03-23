@@ -1,0 +1,152 @@
+{{ header }}{{ column_left }} 
+<div id="content">
+  <div class="page-header">
+    <div class="container-fluid">
+      <div class="pull-right"><a href="{{ add }}" data-toggle="tooltip" title="{{ button_add }}" class="btn btn-primary"><i class="fa fa-plus"></i></a>
+        <button type="button" data-toggle="tooltip" title="{{ button_delete }}" class="btn btn-danger" onclick="confirm('{{ text_confirm }}') ? $('#form-product').submit() : false;"><i class="fa fa-trash"></i></button>
+      </div>
+      <h1>{{ heading_title }}</h1>
+      <ul class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %} 
+        <li><a href="{{ breadcrumb['href'] }}">{{ breadcrumb['text'] }}</a></li>
+        {% endfor %} 
+      </ul>
+    </div>
+  </div>
+  <div class="container-fluid">
+    {% if (error_warning) %} 
+    <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_warning }} 
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    {% endif %} 
+    {% if (success) %} 
+    <div class="alert alert-success"><i class="fa fa-check-circle"></i> {{ success }} 
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    {% endif %} 
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-list"></i> {{ text_list }}</h3>
+      </div>
+      <div class="panel-body">
+        <div class="well">
+          <div class="row">
+            
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label class="control-label" for="input-name">{{ event_name }}</label>
+                <input type="text" name="filter_name" value="{{ filter_name }}" placeholder="{{ event_name }}" id="input-name" class="form-control" />
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label class="control-label" for="input-date-created">{{ entry_date_created }}</label>
+                <div class="input-group date">
+                  <input type="text" name="filter_date_created" value="{{ filter_date_created }}" placeholder="{{ entry_date_created }}" data-date-format="YYYY-MM-DD" id="input-date-created" class="form-control date" />
+                  <span class="input-group-btn">
+                  <button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button>
+                  </span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <form action="{{ delete }}" method="post" enctype="multipart/form-data" id="form-product">
+          <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <td style="width: 1px;" class="text-center"><input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" /></td>
+                  <td class="text-center">{{ column_image }}</td>
+                  <td class="text-center">{% if (sort == 'a.auction_type') %} 
+                    <a href="{{ sort_type }}" class="{{ order | lower }}">{{ column_type }}</a>
+                    {% else %} 
+                    <a href="{{ sort_type }}">{{ column_type }}</a>
+                    {% endif %}</td>
+                  <td class="text-center">{% if (sort == 'ad.title') %} 
+                    <a href="{{ sort_title }}" class="{{ order | lower  }}">{{ column_title }}</a>
+                    {% else %} 
+                    <a href="{{ sort_title }}">{{ column_title }}</a>
+                    {% endif %}</td>
+                  <td class="text-center">{% if (sort == 'ad.end_date') %} 
+                    <a href="{{ sort_enddate }}" class="{{ order | lower  }}">{{ column_enddate }}</a>
+                    {% else %} 
+                    <a href="{{ sort_enddate }}">{{ column_enddate }}</a>
+                    {% endif %}</td>
+                  <td class="text-center">{% if (sort == 'a.status') %} 
+                    <a href="{{ sort_status }}" class="{{ order | lower  }}">{{ column_status }}</a>
+                    {% else %} 
+                    <a href="{{ sort_status }}">{{ column_status }}</a>
+                    {% endif %}</td>
+                  <td class="text-right">{{ column_action }}</td>
+                </tr>
+              </thead>
+              <tbody>
+                {% if (auctions) %} 
+                {% for auction in auctions %} 
+                {% if (auction['end_date'] < date()) %}
+                <tr class="table-danger">
+                  {% else %} 
+                    <tr class="table-success">
+                  {% endif %} 
+                  <td class="text-center">{% if selected in auction.auction_id %} 
+                    <input type="checkbox" name="selected[]" value="{{ auction['auction_id'] }}" checked="checked" />
+                    {% else %} 
+                    <input type="checkbox" name="selected[]" value="{{ auction['auction_id'] }}" />
+                    {% endif %}</td>
+                  <td class="text-center">{% if (auction['image']) %} 
+                    <img src="{{ auction['image'] }}" class="img-thumbnail" alt="{{ auction['title'] }}" title="" data-placeholder="{{ auction['placeholder'] }}" />
+                    {% else %} 
+                    <span class="img-thumbnail list"><i class="fa fa-camera fa-2x"></i></span>
+                    {% endif %}</td>
+                  <td class="text-left">{{ auction['type'] }}</td>
+                  <td class="text-left">{{ auction['title'] }}</td>
+                  <td class="text-left">{{ auction['end_date'] }}</td>
+                  <td class="text-left">{{ auction['auction_status'] }}</td>
+                  <td class="text-right"><a href="{{ auction['edit'] }}" data-toggle="tooltip" title="{{ button_edit }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a></td>
+                </tr>
+                {% endfor %} 
+                {% else %} 
+                <tr>
+                  <td class="text-center" colspan="7">{{ text_no_results }}</td>
+                </tr>
+                {% endif %} 
+              </tbody>
+            </table>
+          </div>
+        </form>
+        <div class="row">
+          <div class="col-sm-6 text-left">{{ pagination }}</div>
+          <div class="col-sm-6 text-right">{{ results }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript"><!--
+$('#button-filter').on('click', function() {
+	var url = 'index.php?route=eventmodule/event_module&token={{ token }}';
+
+	var filter_seller = $('input[name=\'filter_name\']').val();
+
+	if (filter_seller) {
+		url += '&filter_seller=' + encodeURIComponent(filter_seller);
+	}
+
+  var filter_end_date = $('input[name=\'entry_date_created\']').val();
+
+	if (filter_end_date) {
+		url += '&filter_end_date=' + encodeURIComponent(filter_end_date);
+	}
+
+  
+	location = url;
+});
+//--></script>
+<script src="view/javascript/jquery/datetimepicker/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
+  <link href="view/javascript/jquery/datetimepicker/bootstrap-datetimepicker.min.css" type="text/css" rel="stylesheet" media="screen" />
+  <script type="text/javascript"><!--
+$('.date').datetimepicker({
+	pickTime: false
+});
+//--></script>
+</div>
+{{ footer }}

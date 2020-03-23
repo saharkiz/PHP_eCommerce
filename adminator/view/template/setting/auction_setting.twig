@@ -1,0 +1,492 @@
+{{ header }}{{ column_left }} 
+<div id="content">
+  <div class="page-header">
+    <div class="container-fluid">
+      <div class="pull-right">
+        <button type="submit" id="button-save" form="form-setting" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
+        <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a></div>
+      <h1>{{ heading_title }}</h1>
+      <ul class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %} 
+        <li><a href="{{ breadcrumb['href'] }}">{{ breadcrumb['text'] }}</a></li>
+        {% endfor %} 
+      </ul>
+    </div>
+  </div>
+  
+  <div class="container-fluid">
+    {% if (error_warning) %} 
+    <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_warning }} 
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    {% endif %} 
+    {% if (success) %} 
+    <div class="alert alert-success"><i class="fa fa-check-circle"></i> {{ success }} 
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    {% endif %} 
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_edit }}</h3>
+      </div>
+      <div class="panel-body">
+        <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-setting" class="form-horizontal">
+          <ul class="nav nav-tabs">
+            <li class="active"><a href="#tab-auction" data-toggle="tab">{{ tab_auction }}</a></li>
+            <li><a href="#tab-display" data-toggle="tab">{{ tab_display }}</a></li>
+            <li><a href="#tab-option" data-toggle="tab">{{ tab_option }}</a></li>
+          </ul>
+          <div class="tab-content">
+            <div class="tab-pane active" id="tab-auction">
+              <fieldset>
+                <legend>{{ text_auction }}</legend>
+                <div class="form-group" style="display:none;">
+                  <label class="col-sm-2 control-label"><span data-toggle="tooltip" title="{{ help_auction_dutch }}">{{ entry_auction_dutch }}</span></label>
+                  <div class="col-sm-10">
+                    <label class="radio-inline">
+                      {% if (config_auction_dutch) %} 
+                      <input type="radio" name="config_auction_dutch" value="1" checked="checked" />
+                      {{ text_yes }} 
+                      {% else %} 
+                      <input type="radio" name="config_auction_dutch" value="1" />
+                      {{ text_yes }} 
+                      {% endif %} 
+                    </label>
+                    <label class="radio-inline">
+                      {% if (not config_auction_dutch) %} 
+                      <input type="radio" name="config_auction_dutch" value="0" checked="checked" />
+                      {{ text_no }} 
+                      {% else %} 
+                      <input type="radio" name="config_auction_dutch" value="0" />
+                      {{ text_no }} 
+                      {% endif %} 
+                    </label>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label"><span data-toggle="tooltip" title="{{ help_auction_count }}">{{ entry_auction_count }}</span></label>
+                  <div class="col-sm-10">
+                    <label class="radio-inline">
+                      {% if (config_auction_count) %} 
+                      <input type="radio" name="config_auction_count" value="1" checked="checked" />
+                      {{ text_yes }} 
+                      {% else %} 
+                      <input type="radio" name="config_auction_count" value="1" />
+                      {{ text_yes }} 
+                      {% endif %} 
+                    </label>
+                    <label class="radio-inline">
+                      {% if (not config_auction_count) %} 
+                      <input type="radio" name="config_auction_count" value="0" checked="checked" />
+                      {{ text_no }} 
+                      {% else %} 
+                      <input type="radio" name="config_auction_count" value="0" />
+                      {{ text_no }} 
+                      {% endif %} 
+                    </label>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" for="input-admin-limit"><span data-toggle="tooltip" title="{{ help_limit_admin }}">{{ entry_limit_admin }}</span></label>
+                  <div class="col-sm-1">
+                    <input type="text" name="config_auction_limit_admin" value="{{ config_auction_limit_admin }}" placeholder="{{ entry_limit_admin }}" id="input-admin-limit" class="form-control" />
+                    {% if (error_limit_admin) %} 
+                    <div class="text-danger">{{ error_limit_admin }}</div>
+                    {% endif %} 
+                  </div>
+                  <div class="col-sm-9">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label"><span data-toggle="tooltip" title="{{ help_auction_extension }}">{{ entry_auction_extension }}</span></label>
+                  <div class="col-sm-2">
+                    <label class="radio-inline">
+                      {% if (config_auction_extension) %} 
+                      <input type="radio" name="config_auction_extension" value="1" checked="checked" />
+                      {{ text_yes }} 
+                      {% else %} 
+                      <input type="radio" name="config_auction_extension" value="1" />
+                      {{ text_yes }} 
+                      {% endif %} 
+                    </label>
+                    <label class="radio-inline">
+                      {% if (not config_auction_extension) %} 
+                      <input type="radio" name="config_auction_extension" value="0" checked="checked" />
+                      {{ text_no }} 
+                      {% else %} 
+                      <input type="radio" name="config_auction_extension" value="0" />
+                      {{ text_no }} 
+                      {% endif %} 
+                    </label>
+                  </div>
+                  <label class="col-sm-2 control-label" for="input-admin-extension"><span data-toggle="tooltip" title="{{ help_auction_extension_left }}">{{ entry_auction_extension_left }}</span></label>
+                  <div class="col-sm-1">
+                    <input type="text" name="config_auction_extension_left" value="{{ config_auction_extension_left }}" placeholder="{{ entry_auction_extension_left }}" id="input-auction-extension" class="form-control" />Minutes
+                    {% if (error_auction_extension_left) %} 
+                    <div class="text-danger">{{ error_auction_extension_left }}</div>
+                    {% endif %} 
+                  </div>
+                  <label class="col-sm-2 control-label" for="input-admin-extension-for"><span data-toggle="tooltip" title="{{ help_auction_extension_for }}">{{ entry_auction_extension_for }}</span></label>
+                  <div class="col-sm-1">
+                    <input type="text" name="config_auction_extension_for" value="{{ config_auction_extension_for }}" placeholder="{{ entry_auction_extension_for }}" id="input-auction-extension-for" class="form-control" />Minutes
+                    {% if (error_auction_extension_for) %} 
+                    <div class="text-danger">{{ error_auction_extension_for }}</div>
+                    {% endif %} 
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label class="col-sm-2 control-label"><span data-toggle="tooltip" title="{{ help_auction_countdown }}">{{ entry_auction_countdown }}</span></label>
+                  <div class="col-sm-2">
+                    <label class="radio-inline">
+                      {% if (config_auction_countdown) %} 
+                      <input type="radio" name="config_auction_countdown" value="1" checked="checked" />
+                      {{ text_yes }} 
+                      {% else %} 
+                      <input type="radio" name="config_auction_countdown" value="1" />
+                      {{ text_yes }} 
+                      {% endif %} 
+                    </label>
+                    <label class="radio-inline">
+                      {% if (not config_auction_countdown) %} 
+                      <input type="radio" name="config_auction_countdown" value="0" checked="checked" />
+                      {{ text_no }} 
+                      {% else %} 
+                      <input type="radio" name="config_auction_countdown" value="0" />
+                      {{ text_no }} 
+                      {% endif %} 
+                    </label>
+                  </div>
+                  <label class="col-sm-2 control-label" for="input-admin-countdown"><span data-toggle="tooltip" title="{{ help_auction_countdown_time }}">{{ entry_auction_countdown_time }}</span></label>
+                  <div class="col-sm-1">
+                    <input type="text" name="config_auction_countdown_time" value="{{ config_auction_countdown_time }}" placeholder="{{ entry_auction_countdown_time }}" id="input-auction-countdown" class="form-control" />Hours
+                    {% if (error_auction_countdown_time) %} 
+                    <div class="text-danger">{{ error_auction_countdown_time }}</div>
+                    {% endif %} 
+                  </div>
+                </div>
+                <div class="form-group"></div>
+              </fieldset>
+              
+              <fieldset>
+                <legend>{{ text_auction_status }}</legend>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label" for="input-created-status"><span data-toggle="tooltip" title="{{ help_auction_created_status }}">{{ entry_auction_created_status }}</span></label>
+                  <div class="col-sm-3">
+                    <select name="config_auction_created_status" id="input-created-status" class="form-control">
+                      {% for auction_status in auction_statuses %} 
+                      {% if (auction_status['auction_status_id'] == config_auction_created_status) %} 
+                      <option value="{{ auction_status['auction_status_id'] }}" selected="selected">{{ auction_status['name'] }}</option>
+                      {% else %} 
+                      <option value="{{ auction_status['auction_status_id'] }}">{{ auction_status['name'] }}</option>
+                      {% endif %} 
+                      {% endfor %} 
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label" for="input-open-status"><span data-toggle="tooltip" title="{{ help_auction_open_status }}">{{ entry_auction_open_status }}</span></label>
+                  <div class="col-sm-3">
+                    <select name="config_auction_open_status" id="input-open-status" class="form-control">
+                      {% for auction_status in auction_statuses %} 
+                      {% if (auction_status['auction_status_id'] == config_auction_open_status) %} 
+                      <option value="{{ auction_status['auction_status_id'] }}" selected="selected">{{ auction_status['name'] }}</option>
+                      {% else %} 
+                      <option value="{{ auction_status['auction_status_id'] }}">{{ auction_status['name'] }}</option>
+                      {% endif %} 
+                      {% endfor %} 
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label" for="input-closed-status"><span data-toggle="tooltip" title="{{ help_auction_closed_status }}">{{ entry_auction_closed_status }}</span></label>
+                  <div class="col-sm-3">
+                    <select name="config_auction_closed_status" id="input-closed-status" class="form-control">
+                      {% for auction_status in auction_statuses %} 
+                      {% if (auction_status['auction_status_id'] == config_auction_closed_status) %} 
+                      <option value="{{ auction_status['auction_status_id'] }}" selected="selected">{{ auction_status['name'] }}</option>
+                      {% else %} 
+                      <option value="{{ auction_status['auction_status_id'] }}">{{ auction_status['name'] }}</option>
+                      {% endif %} 
+                      {% endfor %} 
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label" for="input-suspended-status"><span data-toggle="tooltip" title="{{ help_auction_suspended_status }}">{{ entry_auction_suspended_status }}</span></label>
+                  <div class="col-sm-3">
+                    <select name="config_auction_suspended_status" id="input-suspended-status" class="form-control">
+                      {% for auction_status in auction_statuses %} 
+                      {% if (auction_status['auction_status_id'] == config_auction_suspended_status) %} 
+                      <option value="{{ auction_status['auction_status_id'] }}" selected="selected">{{ auction_status['name'] }}</option>
+                      {% else %} 
+                      <option value="{{ auction_status['auction_status_id'] }}">{{ auction_status['name'] }}</option>
+                      {% endif %} 
+                      {% endfor %} 
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label" for="input-moderation-status"><span data-toggle="tooltip" title="{{ help_auction_moderation_status }}">{{ entry_auction_moderation_status }}</span></label>
+                  <div class="col-sm-3">
+                    <select name="config_auction_moderation_status" id="input-moderation-status" class="form-control">
+                      {% for auction_status in auction_statuses %} 
+                      {% if (auction_status['auction_status_id'] == config_auction_moderation_status) %} 
+                      <option value="{{ auction_status['auction_status_id'] }}" selected="selected">{{ auction_status['name'] }}</option>
+                      {% else %} 
+                      <option value="{{ auction_status['auction_status_id'] }}">{{ auction_status['name'] }}</option>
+                      {% endif %} 
+                      {% endfor %} 
+                    </select>
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+
+            <div class="tab-pane" id="tab-display">
+              <fieldset>
+                <legend>{{ text_auction_display }}</legend>
+                
+                <div class="form-group">
+                  <label class="col-sm-2 control-label"><span data-toggle="tooltip" title="{{ help_auction_picture_gallery }}">{{ entry_auction_picture_gallery }}</span></label>
+                  <div class="col-sm-10">
+                    <label class="radio-inline">
+                      {% if (config_auction_picture_gallery) %} 
+                      <input type="radio" name="config_auction_picture_gallery" value="1" checked="checked" />
+                      {{ text_yes }} 
+                      {% else %} 
+                      <input type="radio" name="config_auction_picture_gallery" value="1" />
+                      {{ text_yes }} 
+                      {% endif %} 
+                    </label>
+                    <label class="radio-inline">
+                      {% if (not config_auction_picture_gallery) %} 
+                      <input type="radio" name="config_auction_picture_gallery" value="0" checked="checked" />
+                      {{ text_no }} 
+                      {% else %} 
+                      <input type="radio" name="config_auction_picture_gallery" value="0" />
+                      {{ text_no }} 
+                      {% endif %} 
+                    </label>
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset>
+                <legend>{{ text_auction_gallery }}</legend>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" for="input-max-pictures">
+                      <span data-toggle="tooltip" title="{{ help_auction_max_gallery_pictures }}">{{ entry_auction_max_gallery_pictures }}</span>
+                      {% if (error_auction_max_gallery_pictures) %} 
+                      <div class="text-danger">{{ error_auction_max_gallery_pictures }}</div>
+                      {% endif %} 
+                  </label>
+                  <div class="col-sm-1">
+                    <input type="text" name="config_auction_max_gallery_pictures" value="{{ config_auction_max_gallery_pictures }}" placeholder="{{ entry_auction_max_gallery_pictures }}" id="input-max-pictures" class="form-control" />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" for="input-max-picture-size">
+                      <span data-toggle="tooltip" title="{{ help_auction_max_picture_size }}">{{ entry_auction_max_picture_size }}</span>
+                      {% if (error_auction_max_picture_size) %} 
+                      <div class="text-danger">{{ error_auction_max_picture_size }}</div>
+                      {% endif %} 
+                  </label>
+                  <div class="col-sm-1">
+                    <input type="text" name="config_auction_max_picture_size" value="{{ config_auction_max_picture_size }}" placeholder="{{ entry_auction_max_picture_size }}" id="input-max-pictures-size" class="form-control" />kB
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+
+            <div class="tab-pane" id="tab-option">
+              <fieldset>
+                <legend>{{ text_auction_options }}</legend>
+                
+                <div class="form-group">
+                  <label class="col-sm-2 control-label"><span data-toggle="tooltip" title="{{ help_auction_proxy }}">{{ entry_auction_proxy }}</span></label>
+                  <div class="col-sm-10">
+                    <label class="radio-inline">
+                      {% if (config_auction_proxy) %} 
+                      <input type="radio" name="config_auction_proxy" value="1" checked="checked" />
+                      {{ text_yes }} 
+                      {% else %} 
+                      <input type="radio" name="config_auction_proxy" value="1" />
+                      {{ text_yes }} 
+                      {% endif %} 
+                    </label>
+                    <label class="radio-inline">
+                      {% if (not config_auction_proxy) %} 
+                      <input type="radio" name="config_auction_proxy" value="0" checked="checked" />
+                      {{ text_no }} 
+                      {% else %} 
+                      <input type="radio" name="config_auction_proxy" value="0" />
+                      {{ text_no }} 
+                      {% endif %} 
+                    </label>
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label class="col-sm-2 control-label"><span data-toggle="tooltip" title="{{ help_auction_custom_start_date }}">{{ entry_auction_custom_start_date }}</span></label>
+                  <div class="col-sm-10">
+                    <label class="radio-inline">
+                      {% if (config_auction_custom_start_date) %} 
+                      <input type="radio" name="config_auction_custom_start_date" value="1" checked="checked" />
+                      {{ text_yes }} 
+                      {% else %} 
+                      <input type="radio" name="config_auction_custom_start_date" value="1" />
+                      {{ text_yes }} 
+                      {% endif %} 
+                    </label>
+                    <label class="radio-inline">
+                      {% if (not config_auction_custom_start_date) %} 
+                      <input type="radio" name="config_auction_custom_start_date" value="0" checked="checked" />
+                      {{ text_no }} 
+                      {% else %} 
+                      <input type="radio" name="config_auction_custom_start_date" value="0" />
+                      {{ text_no }} 
+                      {% endif %} 
+                    </label>
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label class="col-sm-2 control-label"><span data-toggle="tooltip" title="{{ help_auction_custom_end_date }}">{{ entry_auction_custom_end_date }}</span></label>
+                  <div class="col-sm-10">
+                    <label class="radio-inline">
+                      {% if (config_auction_custom_end_date) %} 
+                      <input type="radio" name="config_auction_custom_end_date" value="1" checked="checked" />
+                      {{ text_yes }} 
+                      {% else %} 
+                      <input type="radio" name="config_auction_custom_end_date" value="1" />
+                      {{ text_yes }} 
+                      {% endif %} 
+                    </label>
+                    <label class="radio-inline">
+                      {% if (not config_auction_custom_end_date) %} 
+                      <input type="radio" name="config_auction_custom_end_date" value="0" checked="checked" />
+                      {{ text_no }} 
+                      {% else %} 
+                      <input type="radio" name="config_auction_custom_end_date" value="0" />
+                      {{ text_no }} 
+                      {% endif %} 
+                    </label>
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label class="col-sm-2 control-label"><span data-toggle="tooltip" title="{{ help_auction_bid_increments }}">{{ entry_auction_bid_increments }}</span></label>
+                  <div class="col-sm-10">
+                    <label class="radio-inline">
+                      {% if (config_auction_bid_increments) %} 
+                      <input type="radio" name="config_auction_bid_increments" value="1" checked="checked" />
+                      {{ text_yes }} 
+                      {% else %} 
+                      <input type="radio" name="config_auction_bid_increments" value="1" />
+                      {{ text_yes }} 
+                      {% endif %} 
+                    </label>
+                    <label class="radio-inline">
+                      {% if (not config_auction_bid_increments) %} 
+                      <input type="radio" name="config_auction_bid_increments" value="0" checked="checked" />
+                      {{ text_no }} 
+                      {% else %} 
+                      <input type="radio" name="config_auction_bid_increments" value="0" />
+                      {{ text_no }} 
+                      {% endif %} 
+                    </label>
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label class="col-sm-2 control-label"><span data-toggle="tooltip" title="{{ help_auction_subtitles }}">{{ entry_auction_subtitles }}</span></label>
+                  <div class="col-sm-10">
+                    <label class="radio-inline">
+                      {% if (config_auction_subtitles) %} 
+                      <input type="radio" name="config_auction_subtitles" value="1" checked="checked" />
+                      {{ text_yes }} 
+                      {% else %} 
+                      <input type="radio" name="config_auction_subtitles" value="1" />
+                      {{ text_yes }} 
+                      {% endif %} 
+                    </label>
+                    <label class="radio-inline">
+                      {% if (not config_auction_subtitles) %} 
+                      <input type="radio" name="config_auction_subtitles" value="0" checked="checked" />
+                      {{ text_no }} 
+                      {% else %} 
+                      <input type="radio" name="config_auction_subtitles" value="0" />
+                      {{ text_no }} 
+                      {% endif %} 
+                    </label>
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label class="col-sm-2 control-label"><span data-toggle="tooltip" title="{{ help_auction_additional_cat }}">{{ entry_auction_additional_cat }}</span></label>
+                  <div class="col-sm-10">
+                    <label class="radio-inline">
+                      {% if (config_auction_additional_cat) %} 
+                      <input type="radio" name="config_auction_additional_cat" value="1" checked="checked" />
+                      {{ text_yes }} 
+                      {% else %} 
+                      <input type="radio" name="config_auction_additional_cat" value="1" />
+                      {{ text_yes }} 
+                      {% endif %} 
+                    </label>
+                    <label class="radio-inline">
+                      {% if (not config_auction_additional_cat) %} 
+                      <input type="radio" name="config_auction_additional_cat" value="0" checked="checked" />
+                      {{ text_no }} 
+                      {% else %} 
+                      <input type="radio" name="config_auction_additional_cat" value="0" />
+                      {{ text_no }} 
+                      {% endif %} 
+                    </label>
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label class="col-sm-2 control-label"><span data-toggle="tooltip" title="{{ help_auction_auto_relist }}">{{ entry_auction_auto_relist }}</span></label>
+                  <div class="col-sm-10">
+                    <label class="radio-inline">
+                      {% if (config_auction_auto_relist) %} 
+                      <input type="radio" name="config_auction_auto_relist" value="1" checked="checked" />
+                      {{ text_yes }} 
+                      {% else %} 
+                      <input type="radio" name="config_auction_auto_relist" value="1" />
+                      {{ text_yes }} 
+                      {% endif %} 
+                    </label>
+                    <label class="radio-inline">
+                      {% if (not config_auction_auto_relist) %} 
+                      <input type="radio" name="config_auction_auto_relist" value="0" checked="checked" />
+                      {{ text_no }} 
+                      {% else %} 
+                      <input type="radio" name="config_auction_auto_relist" value="0" />
+                      {{ text_no }} 
+                      {% endif %} 
+                    </label>
+                  </div>
+                  <label class="col-sm-2 control-label" for="input-admin-max-relists">
+                    <span data-toggle="tooltip" title="{{ help_auction_max_relists }}">{{ entry_auction_max_relists }}</span>
+                    {% if (error_auction_max_relists) %} 
+                    <div class="text-danger">{{ error_auction_max_relists }}</div>
+                    {% endif %} 
+                  </label>
+                  <div class="col-sm-1">
+                    <input type="text" name="config_auction_max_relists" value="{{ config_auction_max_relists }}" placeholder="{{ entry_auction_max_relists }}" id="input-auction-max-relists" class="form-control" />
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  
+  
+  {{ footer }} 
